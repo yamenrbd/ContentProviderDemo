@@ -14,18 +14,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
+    private ListView contactName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        contactName = (ListView) findViewById(R.id.contacts_name);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
                     }while (cursor.moveToNext());
                 }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),R.layout.contact_details,R.id.name,contacts);
+                contactName.setAdapter(adapter);
             }
         });
         final int REQUEST_CODE_ASK_PREMISSION =123;
